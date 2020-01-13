@@ -16,10 +16,8 @@ RUN addgroup --system django \
 
 RUN pip install pipenv
 
-# Requirements are installed here to ensure they will be cached.
-COPY ./Pipfile* /tmp/
-RUN cd /tmp && pipenv lock --requirements > requirements.txt && \
-    pip install -r /tmp/requirements.txt
+COPY . /app
+RUN pipenv install --system
 
 USER django
 
