@@ -17,7 +17,7 @@ RUN addgroup --system django \
 RUN pip install pipenv
 
 COPY . /app
-RUN pipenv install --system
+RUN cd /app && pipenv install --system
 
 USER django
 
