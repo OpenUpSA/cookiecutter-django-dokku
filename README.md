@@ -40,6 +40,7 @@ On dev host in cookiecutter template dir
    git add ...
    git commit -m ...
 
+Then start back at the top and verify that it does what's intended.
 
 License
 -------
