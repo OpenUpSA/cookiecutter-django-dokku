@@ -11,21 +11,28 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kxrx0c*-vcc#3_w0zvn%ltu3m0z1ay_6(kemgh_d_dsurkezcj'
+env = environ.Env()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# GENERAL
+# ------------------------------------------------------------------------------
 
-ALLOWED_HOSTS = []
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = env.bool("DJANGO_DEBUG", False)
+
+# Fail loudly if not set.
+SECRET_KEY = env("DJANGO_SECRET_KEY")
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
+# Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -72,13 +79,9 @@ WSGI_APPLICATION = '{{cookiecutter.project_slug}}.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
 
 
 # Password validation

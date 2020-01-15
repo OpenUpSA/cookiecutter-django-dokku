@@ -8,3 +8,20 @@ services:
     ports:
       - "8000:8000"
     command: ./manage.py runserver
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://{{cookiecutter.project_slug}}@db/{{cookiecutter.project_slug}}
+      - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
+      - DJANGO_SECRET_KEY=not-secret-in-dev
+
+  db:
+    image: postgres:11.6
+    environment:
+      - POSTGRES_USER={{cookiecutter.project_slug}}
+      - POSTGRES_DB={{cookiecutter.project_slug}}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
