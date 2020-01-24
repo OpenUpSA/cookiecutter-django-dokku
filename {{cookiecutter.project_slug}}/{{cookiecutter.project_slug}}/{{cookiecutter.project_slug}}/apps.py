@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class DeadbeefConfig(AppConfig):
+class Config(AppConfig):
     name = '{{cookiecutter.project_slug}}'
