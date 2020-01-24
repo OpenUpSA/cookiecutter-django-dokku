@@ -7,13 +7,4 @@ install:
   - "pip install -r requirements-dev.txt"
 script:
   - pytest
-  - >
-    cookiecutter . full_name="Your name"
-    email="you@example.com"
-    github_username=github_user
-    project_name="Name of the project"
-    project_slug=name-of-the-project
-    project_short_description="A short description of the project"
-    release_date="2020-01-15"
-    version="0.1.0"
   - cd name-of-the-project && docker-compose run web ./manage.py test
