@@ -1,5 +1,9 @@
+{% raw %}
 {% extends "base.html" %}
 
+{% block content %}
 <h1>It Works!</h1>
 
-<p>This is the index page for {{cookiecutter.app_slug}} in {{cookiecutter.project_slug}}</p>
+<p>This is the index for {{cookiecutter.app_slug}} in {{cookiecutter.project_slug}}</p>
+{% endblock content %}
+{% endraw %}

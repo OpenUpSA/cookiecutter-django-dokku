@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    '{{cookiecutter.project_slug}}.{{cookiecutter.project_slug}}.apps.Config'
+#    '{{cookiecutter.project_slug}}.{{ cookiecutter.app_slug }}.apps.{{ cookiecutter.app_classname }}Config'
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,7 @@ ROOT_URLCONF = '{{cookiecutter.project_slug}}.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['{{ cookiecutter.project_slug }}/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
