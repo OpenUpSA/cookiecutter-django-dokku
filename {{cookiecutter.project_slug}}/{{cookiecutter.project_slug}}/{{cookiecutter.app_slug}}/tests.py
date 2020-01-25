@@ -1,3 +1,23 @@
-from django.test import TestCase
+from django.test import Client, TestCase
 
-# Create your tests here.
+import html5lib
+
+
+class IndexTestCase(TestCase):
+    def test_index(self):
+        c = Client()
+        response = c.get("/{{ cookiecutter.app_slug }}")
+        self.assertContains(
+            response,
+            "index for {{ cookiecutter.app_slug }} in {{ cookiecutter.project_slug }}",
+        )
+        assertValidHTML(response.content)
+
+
+def assertValidHTML(string):
+    """
+    Raises exception if the string is not valid HTML, e.g. has unmatched tags
+    that need to be matched.
+    """
+    parser = html5lib.HTMLParser(strict=True)
+    parser.parse(string)

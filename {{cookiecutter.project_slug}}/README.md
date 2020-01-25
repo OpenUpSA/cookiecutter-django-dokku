@@ -1,3 +1,11 @@
+Running tests
+-------------
+
+    docker-compose run --rm web python manage.py test
+
+Tests might fail to connect tot he databse if the docker-compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
+
+
 Adding dependencies using Pipenv
 --------------------------------
 
