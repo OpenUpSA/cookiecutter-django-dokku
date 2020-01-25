@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class {{ cookiecutter.app_classname }}Config(AppConfig):
-    name = '{{ cookiecutter.app_slug }}'
+    name = '{{ cookiecutter.project_slug}}.{{ cookiecutter.app_slug }}'

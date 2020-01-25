@@ -38,13 +38,13 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    '{{cookiecutter.project_slug}}.{{ cookiecutter.app_slug }}.apps.{{ cookiecutter.app_classname }}Config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    '{{cookiecutter.project_slug}}.{{ cookiecutter.app_slug }}.apps.{{ cookiecutter.app_classname }}Config'
 ]
 
 MIDDLEWARE = [
