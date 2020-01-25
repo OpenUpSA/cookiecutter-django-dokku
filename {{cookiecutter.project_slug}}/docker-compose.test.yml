@@ -1,0 +1,11 @@
+# Test overlay
+#
+# Use
+
+services:
+
+  test:
+    command: pytest --cov=.
+    environment:
+      - DATABASE_URL=postgresql://{{cookiecutter.project_slug}}-test@db/{{cookiecutter.project_slug}}-test
+      - DJANGO_SECRET_KEY=not-secret-in-test
