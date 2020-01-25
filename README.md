@@ -14,33 +14,13 @@ Generate a new Cookiecutter template layout: `cookiecutter gh:OpenUpSA/cookiecut
 Maintenance
 -----------
 
-The best way I've found to maintain this so far is to hand-code the Dockerfile and docker-compose.yml to a point that I can get a container running, then update things like Pipenv.* and django boilerplate from a root shell in the container. The files are mapped out to the host using docker-compose so I can copy them back into the cookiecutter template, checking git diffs to make sure only the desired changes are made and nothing is overwritten unintentionally. Something like:
+A fairly convenient dev workflow looks something like
 
-This should be taken as pseudocode - there are almost certainly path mistakes here.
-
-On dev host
-
-    cookiecutter . -o /tmp/myproject
-    cd /tmp/myproject
-    docker-compose run -u root web bash
-
-Inside web shell started above
-
-    cd /app
-    pipenv install X==y.2.3
-    django-admin startproject DEADBEEF .
-    django-admin startapp DEADBEEF
-
-On dev host in cookiecutter template dir
-
-   cp /tmp/myproject/DEADBEEF \{\{cookiecutter.project_slug\}\}/
-   mv \{\{cookiecutter.project_slug\}\}/DEADBEEF \{\{cookiecutter.project_slug\}\}/\{\{cookiecutter.project_slug\}\}/
-   find . -type f -name "*.py" -print0 | xargs -0 sed -i'' -e 's/DEADBEEF/{{cookiecutter.project_slug}}/g'
-   git diff
-   git add ...
-   git commit -m ...
-
-Then start back at the top and verify that it does what's intended.
+1. Make a change
+2. In a shell in this directory, run `rm -rf /tmp/end_to_end_test/ && time bash -x tests/test_end_to_end.sh`
+3. Do what you need to debug
+4. In a shell in `/tmp/end_to_end_test`, run `cd . && docker-compose down --volumes`
+5. Rinse and repeat.
 
 License
 -------
