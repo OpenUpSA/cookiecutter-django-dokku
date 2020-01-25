@@ -2,7 +2,7 @@
 set -euf -o pipefail
 
 echo Create test app using this template
-cookiecutter --no-input -o /tmp . project_name="End to end test"
+cookiecutter --no-input -o /tmp . project_name="End to end test" app_slug=myapp
 cd /tmp/end_to_end_test
 
 echo Start wait for postgres to come up
@@ -13,4 +13,6 @@ echo Start the app and wait for it
 docker-compose run -d web python manage.py migrate
 docker-compose up -d
 wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 5 http://localhost:8000 | \
-     grep "This is the default homepage"
+     grep "This is the homepage for"
+wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 5 http://localhost:8000/myapp | \
+     grep "This is the index page for"
