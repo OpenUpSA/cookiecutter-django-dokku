@@ -5,7 +5,9 @@ Complete project setup
 - [ ] Create a repository on [GitHub](https://github.com/OpenUpSA) and add as a remote to this repository
   - e.g. `git remote add origin git@github.com:OpenUpSA/{{ cookiecutter.project_slug }}.git`
 - [ ] Enable Continuous Integration checks for the GitHub Repository at [travis-ci.org](https://travis-ci.org)
-- [ ] Enable code coverage reporting at [codecov.io](https://codecov.io)
+- [ ] Enable code coverage reporting for the project at [codecov.io](https://codecov.io)
+  - [ ] Enable GitHub integration - it automatically configures Travis-CI and shows coverage diffs in pull requests
+  - [ ] Verify that you see coverage % on the Commits tab for the project. If it's just zero, check for errors by clicking a commit item.
 
 
 Running tests
