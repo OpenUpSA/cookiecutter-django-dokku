@@ -87,14 +87,15 @@ A fairly convenient dev workflow looks something like:
 2. In a shell in this directory, run `rm -rf /tmp/end_to_end_test/ && time bash -x tests/test_end_to_end.sh`
 3. Do what you need to debug
 4. In a shell in `/tmp/end_to_end_test`, run `cd . && docker-compose down --volumes`
+  - You might need to add `--rmi local` to remove and rebuild images
 5. Rinse and repeat.
 
 To modify default dependencies:
 
 1. Run the above to get an environment
-2. Get a shell with something like `docker-compose run --rm bash`
+2. Get a root shell with something like `docker-compose run --rm -u root web bash`
 3. Make your dependency changes using pipenv
-4. Outside the container, copy `Pipenv` and `Pipenv.lock` back to this repository
+4. Outside the container, copy `Pipfile` and `Pipfile.lock` back to this repository
 5. Test your changes using the end-to-end test approach above
 
 

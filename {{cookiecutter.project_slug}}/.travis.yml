@@ -1,0 +1,11 @@
+languae: python
+python:
+  - "3.7"
+install:
+  pip install pipenv
+  pipenv install --dev
+script:
+  - docker-compose run --rm test pytest --cov=.
+after_script:
+  - docker-compose logs db
+  - docker-compose logs web
