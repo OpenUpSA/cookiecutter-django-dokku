@@ -5,6 +5,8 @@ install:
   - pip install pipenv
   - pipenv install --dev
 script:
+  # Allow container user to write to current directory for coverage
+  - chmod 777 .
   - docker-compose run --rm web bin/wait-for-postgres.sh coverage run --source=. manage.py test
 after_script:
   # Log DB output in case issues occurred where this can help us debug quicly
