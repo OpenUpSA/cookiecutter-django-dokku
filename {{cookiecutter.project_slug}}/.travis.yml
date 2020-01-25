@@ -2,8 +2,8 @@ languae: python
 python:
   - "3.7"
 install:
-  pip install pipenv
-  pipenv install --dev
+  - pip install pipenv
+  - pipenv install --dev
 script:
   - docker-compose run --rm web bin/wait-for-postgres.sh coverage manage.py test
 after_script:
