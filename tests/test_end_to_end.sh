@@ -1,13 +1,25 @@
 # abort on any errors
 set -euf -o pipefail
 
+PROJECT_NAME=end_to_end_test
+PROJECT_DIR=/tmp/${PROJECT_NAME}
+
+#!/bin/bash
+function finish {
+    cd ${PROJECT_DIR}
+    docker-compose logs db
+    docker-compose logs web
+}
+trap finish EXIT
+
+
 echo Create test app using this template
 cookiecutter --no-input -o /tmp . project_name="End to end test" app_slug=initial_app
-cd /tmp/end_to_end_test
+cd ${PROJECT_DIR}
 
 echo Start wait for postgres to come up
 docker-compose up -d db
-bin/wait_for_postgres.sh postgres://end_to_end_test@db/end_to_end_test
+bin/wait_for_postgres.sh postgres://${PROJECT_NAME}@db/${PROJECT_NAME}
 
 echo Start the app and wait for it
 docker-compose run -d web python manage.py migrate
