@@ -38,7 +38,44 @@ Install `cookiecutter` command line: `pip install cookiecutter`
 
 Usage
 -----
-Generate a new Cookiecutter template layout: `cookiecutter gh:OpenUpSA/cookiecutter-django-dokku`
+
+1. Install cookiecutter
+2. Run `cookiecutter gh:OpenUpSA/cookiecutter-django-dokku`
+3. Answer the questions
+4. Initialise a git repository in yout project (`git init`)
+5. Profit
+
+To try it out quickly, just create a project im /tmp, accept all the defaults, run `tree` and `docker-compose`:
+
+    $ cookiecutter gh:OpenUpSA/cookiecutter-django-dokku -o /tmp
+    full_name [Your name]:
+    project_name [My site]: My Django Project
+    project_slug [my_django_project]:
+    app_slug [polls]: polls
+    ...
+
+    $ tree /tmp/my_django_project/
+    /tmp/my_django_project/
+    ├── docker-compose.yml
+    ├── Dockerfile
+    ├── manage.py
+    ├── my_django_project
+    ├── ├── admin.py
+    ├── ├── initial_app
+    ├── ├── ├── admin.py
+    ...
+
+    $ docker-compose up
+    WARNING: The DJANGO_DEBUG_TOOLBAR variable is not set. Defaulting to a blank string.
+    Creating network "my_django_project_default" with the default driver
+    Creating volume "my_django_project_db-data" with default driver
+    Building web
+    Step 1/9 : FROM python:3.7-slim-buster
+     ---> 5b03cb8574a0
+    Step 2/9 : ENV PYTHONUNBUFFERED 1
+     ---> Using cache
+     ---> 67ce14763e07
+     ...
 
 
 Maintenance
