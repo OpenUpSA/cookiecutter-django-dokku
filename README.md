@@ -5,6 +5,7 @@ Cookiecutter for Django on docker using dokku in prod and docker-compose in dev 
 
 Broad principles this project tries to maintain:
 
+- See [OpenUp's development best practises](https://github.com/OpenUpSA/best-practices/blob/master/development.md)
 - See [12-factor App principles](https://12factor.net/)
 - Projects are tested out of the box (including Continuous Integration (CI))
 - Prefer stable versions of libraries and services
@@ -13,12 +14,16 @@ Broad principles this project tries to maintain:
 
 Properties of the projects this produces:
 
+- Same Dockerfile used for dev, test and prod
 - Project directory named by `project_slug`
   - Django project directory named by `project_slug`
-  - An initial app directory insite the django project directory named by `app_slug`
+    - An initial app directory inside the django project directory named by `app_slug`
 - No non-vendor initial models or migrations
 - Python dependency management via [Pipenv](https://pypi.org/project/pipenv/)
 - Settings relating to security or the correct environment have no default and block startup to ensure they are set explicitly
+- Passing tests
+- Travis-CI
+- Codecov.io code coverage reports for CI test runs
 
 
 Important properties of this cookiecutter:
@@ -87,14 +92,15 @@ A fairly convenient dev workflow looks something like:
 2. In a shell in this directory, run `rm -rf /tmp/end_to_end_test/ && time bash -x tests/test_end_to_end.sh`
 3. Do what you need to debug
 4. In a shell in `/tmp/end_to_end_test`, run `cd . && docker-compose down --volumes`
+  - You might need to add `--rmi local` to remove and rebuild images
 5. Rinse and repeat.
 
 To modify default dependencies:
 
 1. Run the above to get an environment
-2. Get a shell with something like `docker-compose run --rm bash`
+2. Get a root shell with something like `docker-compose run --rm -u root web bash`
 3. Make your dependency changes using pipenv
-4. Outside the container, copy `Pipenv` and `Pipenv.lock` back to this repository
+4. Outside the container, copy `Pipfile` and `Pipfile.lock` back to this repository
 5. Test your changes using the end-to-end test approach above
 
 

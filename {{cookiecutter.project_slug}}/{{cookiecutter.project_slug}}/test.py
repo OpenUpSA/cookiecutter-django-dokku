@@ -6,9 +6,9 @@ import html5lib
 class IndexTestCase(TestCase):
     def test_index(self):
         c = Client()
-        response = c.get("/{{ cookiecutter.app_slug }}")
+        response = c.get("/")
         self.assertContains(
-            response, "index for {{ cookiecutter.app_slug }} in {{ cookiecutter.project_slug }}",
+            response, "homepage for {{ cookiecutter.project_slug }}",
         )
         assertValidHTML(response.content)
 
