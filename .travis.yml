@@ -7,4 +7,4 @@ install:
   - "pip install -r requirements-dev.txt"
 script:
   - pytest
-  - cd name-of-the-project && docker-compose run web ./manage.py test
+  - bash -x test/test_end_to_end.sh
