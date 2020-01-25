@@ -1,9 +1,19 @@
+Complete project setup
+----------------------
+
+- [ ] Initialise a git repository in this directory
+- [ ] Create a repository on [GitHub](https://github.com/OpenUpSA) and add as a remote to this repository
+  - e.g. `git remote add origin git@github.com:OpenUpSA/{{ cookiecutter.project_slug }}.git`
+- [ ] Enable Continuous Integration checks for the GitHub Repository at [travis-ci.org](https://travis-ci.org)
+- [ ] Enable code coverage reporting at [codecov.io](https://codecov.io)
+
+
 Running tests
 -------------
 
     docker-compose run --rm web python manage.py test
 
-Tests might fail to connect tot he databse if the docker-compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
+Tests might fail to connect to the databse if the docker-compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
 
 ## Coverage
 
