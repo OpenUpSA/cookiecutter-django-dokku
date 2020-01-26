@@ -14,9 +14,17 @@ trap finish EXIT
 
 
 echo Create test app using this template
-
-cookiecutter --no-input -o /tmp . project_name="End to end test" app_slug=initial_app
+cookiecutter --no-input --output-dir /tmp . project_name="End to end test" app_slug=initial_app
+chmod -R 777 ${PROJECT_DIR}
 cd ${PROJECT_DIR}
+
+
+echo "Installing frontend dependencies"
+docker-compose run --rm web yarn
+
+
+echo "Building frontend asset bundles"
+docker-compose run --rm web yarn build
 
 
 echo Run app tests

@@ -6,7 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "parcel watch assets/js/index.js --out-dir assets/bundles",
-    "build": "parcel build assets/js/index.js --out-dir assets/bundles"
+    "dev": "parcel watch assets/scss/{{ cookiecutter.project_slug }}.scss assets/js/{{ cookiecutter.project_slug }}.js --out-dir assets/bundles",
+    "build": "parcel build assets/scss/{{ cookiecutter.project_slug }}.scss assets/js/{{ cookiecutter.project_slug }}.js --out-dir assets/bundles --no-content-hash"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.25.1-test.1"
   }
 }
