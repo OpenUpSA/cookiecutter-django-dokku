@@ -37,7 +37,8 @@ Apps go in the project directory `{{ cookiecutter.project_slug }}`
 
 Dependencies are managed via Pipfile, e.g.
 
-    docker-compose run --rm web pipenv install whitenoise[brotli]==1.2.3
+    pipenv install whitenoise[brotli]==1.2.3
+    docker-compose run --rm web pipenv install --system
 
 Make sure to commit updates to Pipfile and Pipfile.lock to git
 

@@ -5,6 +5,7 @@ python:
 install:
   - pip install pipenv
   - pipenv install --dev
+  - docker-compose run --rm web yarn
 
 script:
   # Allow the container user to write to this directory
