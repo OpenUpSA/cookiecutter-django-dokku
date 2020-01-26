@@ -1,0 +1,12 @@
+{
+  "name": "{{ cookiecutter.project_slug }}",
+  "version": "1.0.0",
+  "description": "{{ cookiecutter.project_short_description }}",
+  "main": "assets/js/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "parcel watch assets/js/index.js --out-dir assets/bundles",
+    "build": "parcel build assets/js/index.js --out-dir assets/bundles"
+  }
+}
