@@ -1,4 +1,4 @@
-FROM openup/python-nodejs:python3.7-nodejs12
+FROM openup/docker-python-nodejs:python3.7-nodejs12
 
 ENV PYTHONUNBUFFERED 1
 
