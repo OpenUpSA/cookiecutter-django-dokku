@@ -25,15 +25,14 @@ docker-compose run --rm web yarn
 
 echo "Building frontend asset bundles"
 docker-compose run --rm web yarn build
+docker-compose run web bin/wait-for-postgres.sh python manage.py collectstatic --no-input
 
 
 echo Run app tests
-
 docker-compose run --rm web bin/wait-for-postgres.sh python manage.py test
 
 
 echo Start the app and wait up to 5s for it to respond correctly.
-
 docker-compose run web bin/wait-for-postgres.sh python manage.py migrate
 docker-compose up -d
 wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 5 -O - http://localhost:8000 | \
