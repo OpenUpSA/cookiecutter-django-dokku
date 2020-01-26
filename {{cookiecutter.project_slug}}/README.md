@@ -1,3 +1,7 @@
+{{ cookiecutter.project_name }}
+===============================
+
+
 Complete project setup
 ----------------------
 
@@ -10,6 +14,41 @@ Complete project setup
   - [ ] Verify that you see coverage % on the Commits tab for the project. If it's just zero, check for errors by clicking a commit item.
 
 
+Project Layout
+--------------
+
+### Django
+
+Apps go in the project directory `{{ cookiecutter.project_slug }}`
+
+### Javascript and CSS
+
+JS and CSS are bundled using [parcel](https://parceljs.org/) - see `package.json`.
+
+
+Development setup
+-----------------
+
+In one shell, run the frontend asset builder
+
+    docker-compose run --rm yarn dev
+
+
+In another shell, initialise and run the django app
+
+    docker-compose run --rm web bin/wait-for-postgres.sh
+    docker-compose run --rm web python manage.py migrate
+    docker-compose run --rm web up
+
+
+If you need to destroy and recreate your dev setup, e.g. if you've messed up your
+database data or want to switch to a branch with an incompatible database schema,
+you can destroy all volumes and recreate them by running the following, and running
+the above again:
+
+    docker-compose down --volumes
+
+
 Running tests
 -------------
 
@@ -17,9 +56,11 @@ Running tests
 
 Tests might fail to connect to the databse if the docker-compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
 
+
 ## Coverage
 
 Ensure the host directory where docker-compose is run from is writable by the UID inside the container. The easiest way to do that is to make it globally-writable, e.g. `chmod 777 .` but be aware of the security implications of this.
+
 
 Adding dependencies using Pipenv
 --------------------------------

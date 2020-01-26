@@ -24,7 +24,9 @@ Properties of the projects this produces:
 - Passing tests
 - Travis-CI
 - Codecov.io code coverage reports for CI test runs
-
+- Frontend assets
+  - Bundled using [parcel](https://parceljs.org/)
+  - Hashed and served using [whitenoise](https://pypi.org/project/whitenoise/) in Django.
 
 Important properties of this cookiecutter:
 
