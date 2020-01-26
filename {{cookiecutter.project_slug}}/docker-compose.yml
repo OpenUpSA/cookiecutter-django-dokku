@@ -15,6 +15,7 @@ services:
       - DATABASE_URL=postgresql://{{cookiecutter.project_slug}}@db/{{cookiecutter.project_slug}}
       - DJANGO_DEBUG_TOOLBAR=${DJANGO_DEBUG_TOOLBAR}
       - DJANGO_SECRET_KEY=not-secret-in-dev
+      - DJANGO_WHITENOISE_AUTOREFRESH=True
 
   db:
     image: postgres:11.6

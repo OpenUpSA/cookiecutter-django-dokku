@@ -5,10 +5,13 @@ python:
 install:
   - pip install pipenv
   - pipenv install --dev
+  # Allow the container user to write to this directory
+  - chmod -R 777 .
+  - docker-compose run --rm web yarn
 
 script:
-  # Allow the container user to write to this directory
-  - chmod 777 .
+  - docker-compose run --rm web yarn build
+  - docker-compose run --rm web python manage.py collectstatic --no-input
   - docker-compose run --rm web bin/wait-for-postgres.sh coverage run --source={{ cookiecutter.project_slug }} manage.py test
 
 

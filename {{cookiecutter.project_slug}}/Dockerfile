@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM openup/docker-python-nodejs:python3.7-nodejs12
 
 ENV PYTHONUNBUFFERED 1
 
@@ -8,7 +8,7 @@ RUN apt-get update \
   # psycopg2 dependencies
   && apt-get install -y libpq-dev \
   # git for codecov file listing
-  git \
+  && apt-get install -y git \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*

@@ -1,13 +1,25 @@
-{% raw %}
+{{ '{% load static %}' }}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{cookiecutter.project_slug}}</title>
+    <title>{{ '{% block title %}' }}{{ cookiecutter.project_slug }}{{ '{% endblock %}' }}</title>
+    {{ '{% block meta %}' }}
+    <meta property="description" content="{{ '{% block description %}' }}{{ cookiecutter.project_short_description }}{{ '{% endblock %}' }}" />
+    <meta name="twitter:title" content="{{ '{% block twitter_title %}' }}{{ cookiecutter.project_slug }}{{ '{% endblock %}' }}">
+    <meta name="twitter:description" content="{{ '{% block twitter_description %}' }}{{ cookiecutter.project_short_description }}{{ '{% endblock %}' }}">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:title" content="{{ '{% block og_title %}' }}{{ cookiecutter.project_slug }}{{ '{% endblock %}' }}" />
+    <meta property="og:description" content="{{ '{% block og_description %}' }}{{ cookiecutter.project_short_description }}{{ '{% endblock %}' }}" />
+    {{ '{% endblock %}' }}
+
+    <link rel="stylesheet" href="{{ '{% static "scss/' }}{{ cookiecutter.project_slug }}{{ '.css" %}' }}">
   </head>
   <body>
-    {% block content %}{% endblock %}
+    {{ '{% block content %}{% endblock %}' }}
+
+    <script src="{{ '{% static "js/' }}{{ cookiecutter.project_slug }}{{ '.js" %}' }}" async></script>
   </body>
 </html>
-{% endraw %}

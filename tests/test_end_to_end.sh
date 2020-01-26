@@ -14,18 +14,25 @@ trap finish EXIT
 
 
 echo Create test app using this template
-
-cookiecutter --no-input -o /tmp . project_name="End to end test" app_slug=initial_app
+cookiecutter --no-input --output-dir /tmp . project_name="End to end test" app_slug=initial_app
+chmod -R 777 ${PROJECT_DIR}
 cd ${PROJECT_DIR}
 
 
-echo Run app tests
+echo "Installing frontend dependencies"
+docker-compose run --rm web yarn
 
+
+echo "Building frontend asset bundles"
+docker-compose run --rm web yarn build
+docker-compose run web bin/wait-for-postgres.sh python manage.py collectstatic --no-input
+
+
+echo Run app tests
 docker-compose run --rm web bin/wait-for-postgres.sh python manage.py test
 
 
 echo Start the app and wait up to 5s for it to respond correctly.
-
 docker-compose run web bin/wait-for-postgres.sh python manage.py migrate
 docker-compose up -d
 wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 5 -O - http://localhost:8000 | \
