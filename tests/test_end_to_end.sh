@@ -19,10 +19,6 @@ chmod -R 777 ${PROJECT_DIR}
 cd ${PROJECT_DIR}
 
 
-echo "Installing frontend dependencies"
-docker-compose run --rm web yarn
-
-
 echo "Building frontend asset bundles"
 docker-compose run --rm web yarn build
 docker-compose run web bin/wait-for-postgres.sh python manage.py collectstatic --no-input

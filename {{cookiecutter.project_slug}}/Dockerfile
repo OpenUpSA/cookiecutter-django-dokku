@@ -16,7 +16,10 @@ RUN apt-get update \
 RUN pip install pipenv
 
 COPY . /app
-RUN cd /app && pipenv install --system
+RUN cd /app && \
+    pipenv install --system && \
+    yarn
+
 
 RUN addgroup --system django \
     && adduser --system --ingroup django django

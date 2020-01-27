@@ -59,16 +59,22 @@ Make sure to commit updates to package.json and yarn.lock to git.
 Development setup
 -----------------
 
+Allow the container user to write to this directory, mapped in as volume via docker-compose, e.g.:
+
+    chmod -R 777 .
+
+
 In one shell, run the frontend asset builder
 
-    docker-compose run --rm yarn dev
+    docker-compose run --rm web yarn dev
 
 
 In another shell, initialise and run the django app
 
     docker-compose run --rm web bin/wait-for-postgres.sh
     docker-compose run --rm web python manage.py migrate
-    docker-compose run --rm web up
+    docker-compose run --rm web python manage.py collectstatic
+    docker-compose up
 
 
 If you need to destroy and recreate your dev setup, e.g. if you've messed up your

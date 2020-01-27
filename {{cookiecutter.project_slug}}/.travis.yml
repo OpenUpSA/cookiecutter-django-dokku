@@ -7,7 +7,6 @@ install:
   - pipenv install --dev
   # Allow the container user to write to this directory
   - chmod -R 777 .
-  - docker-compose run --rm web yarn
 
 script:
   - docker-compose run --rm web yarn build
