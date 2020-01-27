@@ -3,7 +3,7 @@ Cookiecutter for Django in Dokku
 
 Cookiecutter for Django on docker using dokku in prod and docker-compose in dev and test.
 
-Broad principles this project tries to maintain:
+### Broad principles this project tries to maintain:
 
 - See [OpenUp's development best practises](https://github.com/OpenUpSA/best-practices/blob/master/development.md)
 - See [12-factor App principles](https://12factor.net/)
@@ -12,7 +12,7 @@ Broad principles this project tries to maintain:
   - prefer Long Term Support (LTS) versions
   - Don't use the bleeding edge - wait until at least one point-release of a new major version.
 
-Properties of the projects this produces:
+### Properties of the projects this produces:
 
 - Same Dockerfile used for dev, test and prod
 - Project directory named by `project_slug`
@@ -28,7 +28,7 @@ Properties of the projects this produces:
   - Bundled using [parcel](https://parceljs.org/)
   - Hashed and served using [whitenoise](https://pypi.org/project/whitenoise/) in Django.
 
-Important properties of this cookiecutter:
+### Important properties of this cookiecutter:
 
 - Ensure it keeps working
   - End-to-end test that creates and smoke-tests a basic project
