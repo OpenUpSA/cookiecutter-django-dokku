@@ -13,6 +13,7 @@ Complete project setup
 - [ ] Enable code coverage reporting for the project at [codecov.io](https://codecov.io)
   - [ ] Enable GitHub integration - it automatically configures Travis-CI and shows coverage diffs in pull requests
   - [ ] Verify that you see coverage % on the Commits tab for the project. If it's just zero, check for errors by clicking a commit item.
+- [ ] Clean up this checklist - your project is set up now and you don't need it any more.
 
 
 Project Layout
@@ -32,6 +33,7 @@ Another good option is to specify the user ID to run as in the container. A pers
 ### Django
 
 Apps go in the project directory `{{ cookiecutter.project_slug }}`
+
 
 ### Python
 
@@ -83,3 +85,18 @@ Running tests
     docker-compose run --rm web python manage.py test
 
 Tests might fail to connect to the databse if the docker-compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
+
+
+Settings
+--------
+
+Undefined settings result in exceptions at startup to let you know they are not configured properly. It's one this way so that the defaults don't accidentally let bad things happen like forgetting analytics or connecting to the prod DB in development.
+
+
+| Key | Default | Type | Description |
+|-----|---------|------|-------------|
+| `DATABASE_URL` | undefined | String | `postgresql://user:password@hostname/dbname` style URL |
+| `DJANGO_DEBUG_TOOLBAR` | False | Boolean | Set to `True` to enable the Django Debug toolbar NOT ON A PUBLIC SERVER! |
+| `DJANGO_SECRET_KEY` | undefined | String | Set this to something secret and unguessable in production. The security of your cookies and other crypto stuff in django depends on it. |
+| `TAG_MANAGER_CONTAINER_ID` | undefined | String | [Google Tag Manager](tagmanager.google.com) Container ID. [Use this to set up Google Analytics.](https://support.google.com/tagmanager/answer/6107124?hl=en). Requried unless `TAG_MANAGER_ENABLED` is set to `False` |
+| `TAG_MANAGER_ENABLED` | `True` | Boolean | Use this to disable the Tag Manager snippets, e.g. in dev or sandbox. |

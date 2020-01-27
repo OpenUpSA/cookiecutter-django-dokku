@@ -2,6 +2,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {{ '{% if TAG_MANAGER_ENABLED %}' }}
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ '{{ TAG_MANAGER_CONTAINER_ID }}'}}');</script>
+    <!-- End Google Tag Manager -->
+    {{ '{% endif %} '}}
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,6 +28,13 @@
     <link rel="stylesheet" href="{{ '{% static "scss/' }}{{ cookiecutter.project_slug }}{{ '.css" %}' }}">
   </head>
   <body>
+    {{ '{% if TAG_MANAGER_ENABLED %} '}}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ '{{ TAG_MANAGER_CONTAINER_ID }}' }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {{ '{% endif %} '}}
+
     {{ '{% block content %}{% endblock %}' }}
 
     <script src="{{ '{% static "js/' }}{{ cookiecutter.project_slug }}{{ '.js" %}' }}" async></script>

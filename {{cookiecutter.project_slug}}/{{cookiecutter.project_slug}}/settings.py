@@ -155,3 +155,8 @@ logging.config.dictConfig(
         },
     }
 )
+
+
+TAG_MANAGER_ENABLED = env.bool("TAG_MANAGER_ENABLED", True)
+if TAG_MANAGER_ENABLED:
+    TAG_MANAGER_CONTAINER_ID = env.get("TAG_MANAGER_CONTAINER_ID")
