@@ -1,6 +1,7 @@
 FROM openup/docker-python-nodejs:python3.7-nodejs12
 
 ENV PYTHONUNBUFFERED 1
+ENV NODE_ENV production
 
 RUN apt-get update \
   # dependencies for building Python packages
@@ -15,11 +16,12 @@ RUN apt-get update \
 
 RUN pip install pipenv
 
-COPY . /app
-RUN cd /app && \
-    pipenv install --system && \
-    yarn
+# Copy, then install requirements before copying rest for a requirements cache layer.
+COPY Pipfile* /tmp/
+RUN cd /tmp \
+    && pipenv install --system
 
+COPY . /app
 
 RUN addgroup --system django \
     && adduser --system --ingroup django django
@@ -27,3 +29,8 @@ RUN chown -R django:django /app
 USER django
 
 WORKDIR /app
+
+RUN yarn && yarn build
+
+EXPOSE 5000
+CMD /app/bin/start.sh

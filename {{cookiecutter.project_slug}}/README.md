@@ -1,5 +1,5 @@
-[![codecov](https://codecov.io/gh/{{ cookiecutter.project_slug }}/{{ cookiecutter.app_slug }}/branch/master/graph/badge.svg)](https://codecov.io/gh/{{ cookiecutter.project_slug }}/{{ cookiecutter.app_slug }}/)
-[![Build Status](https://travis-ci.org/{{ cookiecutter.project_slug }}/{{ cookiecutter.app_slug }}.png)](https://travis-ci.org/{{ cookiecutter.project_slug }}/{{ cookiecutter.app_slug }})
+[![codecov](https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/branch/master/graph/badge.svg)](https://codecov.io/gh/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/)
+[![Build Status](https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.png)](https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }})
 
 {{ cookiecutter.project_name }}
 ===============================
