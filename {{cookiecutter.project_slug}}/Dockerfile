@@ -19,12 +19,15 @@ RUN pip install pipenv
 # Copy, then install requirements before copying rest for a requirements cache layer.
 COPY Pipfile* /tmp/
 RUN cd /tmp \
-    && pipenv install --system
+    && pipenv install --system --dev
 
 COPY . /app
 
-RUN addgroup --system django \
-    && adduser --system --ingroup django django
+ARG USER_ID
+ARG GROUP_ID
+
+RUN addgroup --gid $GROUP_ID --system django \
+    && adduser --system --uid $USER_ID --gid $GROUP_ID django
 RUN chown -R django:django /app
 USER django
 

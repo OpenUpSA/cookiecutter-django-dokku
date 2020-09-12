@@ -6,7 +6,7 @@ install:
   - pip install pipenv
   - pipenv install --dev
   # Allow the container user to write to this directory
-  - chmod -R 777 .
+  - export USER_ID=$(id -u) && export GROUP_ID=$(id -g)
   - docker-compose run --rm web yarn
 
 script:

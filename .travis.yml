@@ -5,4 +5,5 @@ install:
   - "pip install -r requirements-dev.txt"
 script:
   - pytest
+  - export USER_ID=$(id -u) && export GROUP_ID=$(id -g)
   - bash -x tests/test_end_to_end.sh

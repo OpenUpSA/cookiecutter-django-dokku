@@ -3,7 +3,11 @@ version: '3'
 services:
 
   web:
-    build: .
+    build:
+      context: .
+      args:
+        USER_ID: $USER_ID
+        GROUP_ID: $GROUP_ID
     volumes:
       - .:/app
     ports:
