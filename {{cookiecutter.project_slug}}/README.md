@@ -44,17 +44,17 @@ Apps go in the project directory `{{ cookiecutter.project_slug }}`
 
 ### Python
 
-Dependencies are managed via Pipfile in the docker container.
+Dependencies are managed via poetry in the docker container.
 
 Add and lock dependencies in a temporary container:
 
-    docker-compose run --rm web pipenv install pkgname==1.2.3
+    docker-compose run --rm web poetry add pkgname==1.2.3
 
 Rebuild the image to contain the new dependencies:
 
     docker-compose build web
 
-Make sure to commit updates to Pipfile and Pipfile.lock to git
+Make sure to commit updates to pyproject.toml and poetry.lock to git
 
 
 ### Javascript and CSS
