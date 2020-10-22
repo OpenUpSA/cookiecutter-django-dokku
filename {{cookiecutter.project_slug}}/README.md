@@ -25,16 +25,11 @@ Project Layout
 
 ### Docker
 
-This directory is mapped as a volume in the app. This can result in file permission errors like `EACCES: permission denied`. File permissions are generally based on UID integers and not usernames, so it doesn't matter what users are called, UIDs have to match or be mapped to the same numbers between the host and container.
-
-We want to avoid running as root in production (even inside a container) and we want production to be as similar as possible to dev and test.
-
-The easiest solution is to make this directory world-writable so that the container user can write to install/update stuff. Be aware of the security implications of this. e.g.
-
-    sudo find . -type d -exec chmod 777 '{}' \;
-    sudo find . -type f -exec chmod 774 '{}' \;
-
-Another good option is to specify the user ID to run as in the container. A persistent way to do that is by specifying `user: ${UID}:${GID}` in a `docker-compose.yml` file, perhaps used as an overlay, and specifying your host user's IDs in an environment file used by docker-compose, e.g. `.env`.
+On Linux, you probably want to set the environment variables `USER_ID=$(id -u)`
+and `GROUP_ID=$(id -g)` where you run docker-compose so that the container
+shares your UID and GID. This is important for the container to have permission
+to modify files owned by your host user (e.g. for python-black) and your host
+user to modify files created by the container (e.g. migrations).
 
 
 ### Django
@@ -44,17 +39,17 @@ Apps go in the project directory `{{ cookiecutter.project_slug }}`
 
 ### Python
 
-Dependencies are managed via Pipfile in the docker container.
+Dependencies are managed via poetry in the docker container.
 
 Add and lock dependencies in a temporary container:
 
-    docker-compose run --rm web pipenv install pkgname==1.2.3
+    docker-compose run --rm web poetry add pkgname==1.2.3
 
 Rebuild the image to contain the new dependencies:
 
     docker-compose build web
 
-Make sure to commit updates to Pipfile and Pipfile.lock to git
+Make sure to commit updates to pyproject.toml and poetry.lock to git
 
 
 ### Javascript and CSS
