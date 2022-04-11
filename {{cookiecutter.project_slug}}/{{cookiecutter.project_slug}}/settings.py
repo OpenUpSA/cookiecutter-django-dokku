@@ -33,7 +33,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
 ALLOWED_HOSTS = ["*"]
 
-TAG_MANAGER_ID = env.str("TAG_MANAGER_ID", None)
+TAG_MANAGER_CONTAINER_ID = env.str("TAG_MANAGER_CONTAINER_ID", None)
 
 # Application definition
 
@@ -69,11 +69,11 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "{{cookiecutter.project_slug}}.{{cookiecutter.app_slug}}.context_processors.tag_manager_id",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "{{cookiecutter.app_slug}}.context_processors.tag_manager_id"
             ],
         },
     },
