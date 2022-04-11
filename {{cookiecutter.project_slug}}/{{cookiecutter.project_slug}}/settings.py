@@ -33,7 +33,6 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
 ALLOWED_HOSTS = ["*"]
 
-TAG_MANAGER_CONTAINER_ID = env.str("TAG_MANAGER_CONTAINER_ID", None)
 
 # Application definition
 

@@ -22,7 +22,8 @@ services:
       - DJANGO_DEBUG_TOOLBAR
       - DJANGO_SECRET_KEY=not-secret-in-dev
       - DJANGO_WHITENOISE_AUTOREFRESH=True
-      - TAG_MANAGER_ENABLED=False
+      - TAG_MANAGER_ENABLED=${TAG_MANAGER_ENABLED:-False}
+      - TAG_MANAGER_CONTAINER_ID
 
   db:
     image: postgres:11.6
