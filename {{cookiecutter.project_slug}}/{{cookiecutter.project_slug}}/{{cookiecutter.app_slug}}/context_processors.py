@@ -1,4 +1,4 @@
-from django.conf import settings
+from {{cookiecutter.project_slug}} import settings
 
 
 def tag_manager_id(request):
