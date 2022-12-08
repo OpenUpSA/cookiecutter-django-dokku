@@ -6,7 +6,7 @@ authors = []
 
 [tool.poetry.dependencies]
 python = "^3.8"
-django = "^3.1.2"
+django = "^3.1.14"
 django-environ = "^0.4.5"
 psycopg2 = "^2.8.6"
 werkzeug = "^1.0.1"
