@@ -1,7 +1,7 @@
 Cookiecutter for Django in Dokku
 ================================
 
-Cookiecutter for Django on docker using dokku in prod and docker-compose in dev and test.
+Cookiecutter for Django on docker using dokku in prod and docker compose in dev and test.
 
 ### Broad principles this project tries to maintain:
 
@@ -52,7 +52,7 @@ Usage
 4. Initialise a git repository in yout project (`git init`)
 5. Profit
 
-To try it out quickly, just create a project im /tmp, accept all the defaults, run `tree` and `docker-compose`:
+To try it out quickly, just create a project im /tmp, accept all the defaults, run `tree` and `docker compose`:
 
     $ cookiecutter gh:OpenUpSA/cookiecutter-django-dokku -o /tmp
     full_name [Your name]:
@@ -72,7 +72,7 @@ To try it out quickly, just create a project im /tmp, accept all the defaults, r
     ├── ├── ├── admin.py
     ...
 
-    $ docker-compose up
+    $ docker compose up
     WARNING: The DJANGO_DEBUG_TOOLBAR variable is not set. Defaulting to a blank string.
     Creating network "my_django_project_default" with the default driver
     Creating volume "my_django_project_db-data" with default driver
@@ -93,14 +93,14 @@ A fairly convenient dev workflow looks something like:
 1. Make a change
 2. In a shell in this directory, run `rm -rf /tmp/end_to_end_test/ && time bash -x tests/test_end_to_end.sh`
 3. Do what you need to debug
-4. In a shell in `/tmp/end_to_end_test`, run `cd . && docker-compose down --volumes`
+4. In a shell in `/tmp/end_to_end_test`, run `cd . && docker compose down --volumes`
   - You might need to add `--rmi local` to remove and rebuild images
 5. Rinse and repeat.
 
 To modify default dependencies:
 
 1. Run the above to get an environment
-2. Get a root shell with something like `docker-compose run --rm -u root web bash`
+2. Get a root shell with something like `docker compose run --rm -u root web bash`
 3. Make your dependency changes using pipenv
 4. Outside the container, copy `Pipfile` and `Pipfile.lock` back to this repository
 5. Test your changes using the end-to-end test approach above
