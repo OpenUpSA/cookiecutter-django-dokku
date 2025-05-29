@@ -1,4 +1,4 @@
-FROM openup/docker-python-nodejs:python3.7-nodejs12
+FROM nikolaik/python-nodejs:python3.13-nodejs24
 
 ENV POETRY_VIRTUALENVS_CREATE false
 ENV PIP_NO_CACHE_DIR off
@@ -11,8 +11,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 
 RUN set -ex; \
   apt-get update; \
-  # dependencies for building Python packages \
-  apt-get install -y build-essential python3.7-dev; \
   # psycopg2 dependencies \
   apt-get install -y libpq-dev; \
   # git for codecov file listing \
@@ -29,14 +27,14 @@ RUN set -ex; \
   cd /tmp; \
   poetry install
 
-COPY . /app
+COPY --chown=django:django . /app
 
 ARG USER_ID=1001
 ARG GROUP_ID=1001
 
 RUN set -ex; \
   addgroup --gid $GROUP_ID --system django; \
-  adduser --system --uid $USER_ID --gid $GROUP_ID django; \
+  adduser --system --home /home/django --uid $USER_ID --gid $GROUP_ID django; \
   chown -R django:django /app
 
 USER django
