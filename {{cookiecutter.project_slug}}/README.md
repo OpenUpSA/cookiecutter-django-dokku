@@ -26,7 +26,7 @@ Project Layout
 ### Docker
 
 On Linux, you probably want to set the environment variables `USER_ID=$(id -u)`
-and `GROUP_ID=$(id -g)` where you run docker-compose so that the container
+and `GROUP_ID=$(id -g)` where you run docker compose so that the container
 shares your UID and GID. This is important for the container to have permission
 to modify files owned by your host user (e.g. for python-black) and your host
 user to modify files created by the container (e.g. migrations).
@@ -43,11 +43,11 @@ Dependencies are managed via poetry in the docker container.
 
 Add and lock dependencies in a temporary container:
 
-    docker-compose run --rm web poetry add pkgname==1.2.3
+    docker compose run --rm web poetry add pkgname==1.2.3
 
 Rebuild the image to contain the new dependencies:
 
-    docker-compose build web
+    docker compose build web
 
 Make sure to commit updates to pyproject.toml and poetry.lock to git
 
@@ -58,7 +58,7 @@ JS and CSS are bundled using [parcel](https://parceljs.org/) - see `package.json
 
 Dependencies are managed via `yarn`, e.g.
 
-    docker-compose run --rm web yarn add bootstrap@4.x
+    docker compose run --rm web yarn add bootstrap@4.x
 
 Make sure to commit updates to package.json and yarn.lock to git.
 
@@ -68,14 +68,14 @@ Development setup
 
 In one shell, run the frontend asset builder
 
-    docker-compose run --rm web yarn dev
+    docker compose run --rm web yarn dev
 
 
 In another shell, initialise and run the django app
 
-    docker-compose run --rm web bin/wait-for-postgres.sh
-    docker-compose run --rm web python manage.py migrate
-    docker-compose up
+    docker compose run --rm web bin/wait-for-postgres.sh
+    docker compose run --rm web python manage.py migrate
+    docker compose up
 
 
 If you need to destroy and recreate your dev setup, e.g. if you've messed up your
@@ -83,15 +83,15 @@ database data or want to switch to a branch with an incompatible database schema
 you can destroy all volumes and recreate them by running the following, and running
 the above again:
 
-    docker-compose down --volumes
+    docker compose down --volumes
 
 
 Running tests
 -------------
 
-    docker-compose run --rm web python manage.py test
+    docker compose run --rm web python manage.py test
 
-Tests might fail to connect to the databse if the docker-compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
+Tests might fail to connect to the databse if the docker compose `db` service wasn't running and configured yet. Just check the logs for the `db` service and run the tests again.
 
 
 Settings

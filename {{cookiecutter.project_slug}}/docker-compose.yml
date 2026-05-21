@@ -1,7 +1,4 @@
-version: '3'
-
 services:
-
   web:
     build:
       context: .
@@ -25,7 +22,7 @@ services:
       - TAG_MANAGER_ENABLED=False
 
   db:
-    image: postgres:11.6
+    image: postgres:17.5
     environment:
       - POSTGRES_USER={{cookiecutter.project_slug}}
       - POSTGRES_PASSWORD=devpassword
